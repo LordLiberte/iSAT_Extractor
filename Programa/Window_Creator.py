@@ -5,6 +5,7 @@ from function_btn import cargar_archivo, configurar_tabla  # Importar específic
 
 def crear_ventana_pestanas():
     window = tk.Tk()  # Ventana Principal
+    window.update_idletasks()
     window.geometry("1280x720")  # Tamaño de la ventana
     window.title("iSAT_Extractor with Python - Carlos")  # Título de la ventana
     
@@ -36,6 +37,8 @@ def crear_ventana_pestanas():
                                   xscrollcommand=scrollbar_x.set,
                                   show='headings')  # Mostrar solo encabezados
     tabla_pestaña1.pack(expand=True, fill="both")
+    # Reducir carga de redibujado
+    tabla_pestaña1.config(displaycolumns='all')
     
     # Configurar scrollbars
     scrollbar_y.config(command=tabla_pestaña1.yview)
