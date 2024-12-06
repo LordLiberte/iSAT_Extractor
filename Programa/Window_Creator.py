@@ -38,9 +38,6 @@ def crear_ventana_pestanas():
                                   show='headings')  # Mostrar solo encabezados
     tabla_pestaña1.pack(expand=True, fill="both")  # añadirlo a la pestaña
     
-    # Reducir carga de redibujado
-    tabla_pestaña1.config(displaycolumns='all')
-    
     # Configurar scrollbars
     scrollbar_y.config(command=tabla_pestaña1.yview)  # vertical
     scrollbar_x.config(command=tabla_pestaña1.xview)  # horizontal
