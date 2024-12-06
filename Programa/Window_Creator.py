@@ -1,6 +1,5 @@
 """Crearemos la ventana y sus pestañas"""
-import tkinter as tk
-from tkinter import ttk
+from libraries import tk, ttk
 from botones_decoracion import func_pestaña1
 
 def crear_ventana_pestanas():
