@@ -34,10 +34,29 @@ def cargar_archivo():
     
     return None
 
+# Función para configurar la tabla
 def configurar_tabla(tabla, dataframe):
     # Limpiar tabla existente
     for i in tabla.get_children():
         tabla.delete(i)
+        
+       # Configurar estilo personalizado
+    style = ttk.Style()
+    
+    # Configuración de altura de filas
+    style.configure("Custom.Treeview", 
+                    rowheight=150,               # Altura de filas
+                    background='white',          # Color de fondo
+                    foreground='black',          # Color de texto
+                    fieldbackground='white')     # Color de fondo de celdas
+    
+    # Configuración de colores de selección
+    style.map("Custom.Treeview", 
+              background=[('selected', '#4A6984')],   # Color de fondo al seleccionar
+              foreground=[('selected', 'white')])    # Color de texto al seleccionar
+    
+    # Aplicar estilo personalizado
+    tabla.configure(style="Custom.Treeview")
     
     # Limpiar columnas existentes
     tabla['columns'] = []
@@ -63,6 +82,7 @@ def configurar_tabla(tabla, dataframe):
     
     print(f"Insertados {len(datos)} registros en la tabla")
 
+# Función para ajustar las columnas
 def ajustar_ancho_columnas(tabla, dataframe):
     """
     Ajusta el ancho de las columnas basándose en el contenido

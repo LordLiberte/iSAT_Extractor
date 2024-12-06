@@ -1,7 +1,7 @@
 """Crearemos la ventana y sus pestañas"""
 from libraries import tk, ttk, pd
 from botones_decoracion import *
-from function_btn import *
+from function_btn import cargar_archivo, configurar_tabla  # Importar específicamente
 
 def crear_ventana_pestanas():
     window = tk.Tk()  # Ventana Principal
@@ -41,9 +41,19 @@ def crear_ventana_pestanas():
     scrollbar_y.config(command=tabla_pestaña1.yview)
     scrollbar_x.config(command=tabla_pestaña1.xview)
     
+    # Definir función de carga y mostrar tabla
+    def cargar_y_mostrar_tabla():
+        # Cargar archivo
+        dataframe = cargar_archivo()
+        
+        # Si se cargó correctamente el DataFrame
+        if dataframe is not None:
+            # Configurar la tabla con el DataFrame
+            configurar_tabla(tabla_pestaña1, dataframe)
+    
     # Botón de carga
     btn_cargar = ttk.Button(pestaña1, text="Cargar Archivo", style="Custom.TButton",
-                            command=lambda: cargar_y_mostrar_tabla(tabla_pestaña1))
+                            command=cargar_y_mostrar_tabla)
     btn_cargar.pack(padx=10, pady=10)
 
     # PESTAÑA 2 - PROCESAMIENTO DE DATOS ======================================================
