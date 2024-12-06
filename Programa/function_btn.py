@@ -22,10 +22,6 @@ def cargar_archivo():
                 print("Formato de archivo no soportado")
                 return None
             
-            print("DataFrame cargado:")
-            print(dataframe)
-            print("\nTipo de columnas:", dataframe.dtypes)
-            
             return dataframe
         
         except Exception as e:
