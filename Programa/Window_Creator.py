@@ -1,5 +1,5 @@
 """Crearemos la ventana y sus pestañas"""
-from libraries import tk, ttk, pd
+from libraries import tk, ttk
 from botones_decoracion import *
 from function_btn import cargar_archivo, configurar_tabla  # Importar específicamente
 
