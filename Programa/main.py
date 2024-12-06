@@ -1,5 +1,5 @@
 """Archivo principal del programa, donde se definirá su funcionamiento"""
-from libraries import *  # Módulo de librerías
-from Window_Creator import *  # Módulo de la ventana y pestañas
+from Window_Creator import crear_ventana_pestanas
 
-crear_ventana_pestañas()
+if __name__ == "__main__":
+    crear_ventana_pestanas()
