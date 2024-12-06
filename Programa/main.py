@@ -1,4 +1,4 @@
-"""Archivo principal del programa, donde se definirá su funcionamiento"""
+"""Archivo principal del programa, donde se iniciará"""
 from Window_Creator import crear_ventana_pestanas
 
 if __name__ == "__main__":
