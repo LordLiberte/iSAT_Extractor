@@ -36,13 +36,14 @@ def crear_ventana_pestanas():
                                   yscrollcommand=scrollbar_y.set, 
                                   xscrollcommand=scrollbar_x.set,
                                   show='headings')  # Mostrar solo encabezados
-    tabla_pestaña1.pack(expand=True, fill="both")
+    tabla_pestaña1.pack(expand=True, fill="both")  # añadirlo a la pestaña
+    
     # Reducir carga de redibujado
     tabla_pestaña1.config(displaycolumns='all')
     
     # Configurar scrollbars
-    scrollbar_y.config(command=tabla_pestaña1.yview)
-    scrollbar_x.config(command=tabla_pestaña1.xview)
+    scrollbar_y.config(command=tabla_pestaña1.yview)  # vertical
+    scrollbar_x.config(command=tabla_pestaña1.xview)  # horizontal
     
     # Definir función de carga y mostrar tabla
     def cargar_y_mostrar_tabla():
