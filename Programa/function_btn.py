@@ -28,7 +28,7 @@ def cargar_archivo():
             print(f"Error al cargar el archivo: {e}")
             return None
     
-    return None
+    return archivo
 
 # Función para configurar la tabla
 def configurar_tabla(tabla, dataframe):

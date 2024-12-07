@@ -3,24 +3,9 @@ from libraries import tk, ttk
 from botones_decoracion import *
 from function_btn import cargar_archivo, configurar_tabla  # Importar específicamente
 
-def crear_ventana_pestanas():
-    window = tk.Tk()  # Ventana Principal
-    window.update_idletasks()
-    window.geometry("1280x720")  # Tamaño de la ventana
-    window.title("iSAT_Extractor with Python - Carlos")  # Título de la ventana
-    
-    # NOTEBOOK de PESTAÑAS -- CONTENEDOR
-    notebook = ttk.Notebook(window)
-
-    # PESTAÑA 1 - CARGA DE DATOS ======================================================
-    pestaña1 = ttk.Frame(notebook)  # asigna la pestaña al notebook
-    notebook.add(pestaña1, text="Carga de Archivos")  # añade la pestaña al notebook
-    
-    # Configurar estilo y botón
-    configurar_estilos()
-    
+def Treeviews(pestaña):
     # Crear Treeview con scrollbars
-    frame_tabla = ttk.Frame(pestaña1)
+    frame_tabla = ttk.Frame(pestaña)
     frame_tabla.pack(expand=True, fill="both", padx=10, pady=10)
     
     # Scrollbar vertical
@@ -41,6 +26,26 @@ def crear_ventana_pestanas():
     # Configurar scrollbars
     scrollbar_y.config(command=tabla_pestaña1.yview)  # vertical
     scrollbar_x.config(command=tabla_pestaña1.xview)  # horizontal
+    return tabla_pestaña1
+
+def crear_ventana_pestanas():
+    window = tk.Tk()  # Ventana Principal
+    window.update_idletasks()
+    window.geometry("1280x720")  # Tamaño de la ventana
+    window.title("iSAT_Extractor with Python - Carlos")  # Título de la ventana
+    
+    # NOTEBOOK de PESTAÑAS -- CONTENEDOR
+    notebook = ttk.Notebook(window)
+
+    # INICIO PESTAÑAS =================================================================
+    # PESTAÑA 1 - CARGA DE DATOS ======================================================
+    pestaña1 = ttk.Frame(notebook)  # asigna la pestaña al notebook
+    notebook.add(pestaña1, text="Carga de Archivos")  # añade la pestaña al notebook
+    
+    # Configurar estilo y botón
+    configurar_estilos()
+    
+    tabla_pestaña1 = Treeviews(pestaña1)  # Creación de la tabla de pestaña 1
     
     # Definir función de carga y mostrar tabla
     def cargar_y_mostrar_tabla():
@@ -51,16 +56,34 @@ def crear_ventana_pestanas():
         if dataframe is not None:
             # Configurar la tabla con el DataFrame
             configurar_tabla(tabla_pestaña1, dataframe)
+        
     
     # Botón de carga
     btn_cargar = ttk.Button(pestaña1, text="Cargar Archivo", style="Custom.TButton",
                             command=cargar_y_mostrar_tabla)
     btn_cargar.pack(padx=10, pady=10)
-
+    print(btn_cargar)
+    # FIN PESTAÑA 1 ===========================================================================
+    #
+    
+    #
     # PESTAÑA 2 - PROCESAMIENTO DE DATOS ======================================================
     pestaña2 = ttk.Frame(notebook)  # asigna la pestaña al notebook
     notebook.add(pestaña2, text="Procesamiento de datos")  # añade la pestaña al notebook
     
+    tabla_pestaña2 = Treeviews(pestaña2)  # Introduce una tabla en pestaña 2
+    
+    def procesar_mostrar_tabla():
+        pass
+    
+    # Botón para realizar procesamiento de los datos
+    btn_procesar = ttk.Button(pestaña2, text="Procesar Archivo",
+                              style="Custom.TButton", command=procesar_mostrar_tabla)
+    btn_procesar.pack(pady=10, padx=10)
+    # FIN PESTAÑA 2 ===========================================================================
+    #
+    
+    #
     # PESTAÑA 3 - VISUALIZACIÓN DE DATOS ======================================================
     pestaña3 = ttk.Frame(notebook)  # asigna la pestaña al notebook
     notebook.add(pestaña3, text="Visualización de datos")  # añade la pestaña al notebook
