@@ -2,4 +2,8 @@
 from Window_Creator import crear_ventana_pestanas
 
 if __name__ == "__main__":
-    crear_ventana_pestanas()
+    crear_ventana_pestanas()  # Crear ventana y pestañas
+    
+    
+    
+    
