@@ -74,7 +74,7 @@ def crear_ventana_pestanas():
     progreso.pack(pady=10)
 
     def procesar_datos():
-        global global_dataframe  # Importante: usar la variable global
+        global global_dataframe
         if global_dataframe is None:
             tk.messagebox.showerror(
                 "Error", "Debe cargar un archivo antes de procesar los datos"
@@ -97,9 +97,22 @@ def crear_ventana_pestanas():
                         if "," in linea:
                             partes = linea.split(",", 1)
                             titulo, valor = partes[0].strip(), partes[1].strip()
+                            
+                            # Intentar convertir a float
+                            try:
+                                valor_convertido = float(valor.replace(',', '.'))
+                            except ValueError:
+                                # Si no se puede convertir a float, mantener como está
+                                valor_convertido = valor
+                            
+                            # Manejo especial para fechas
                             if "DataTime" in titulo:
-                                valor = pd.to_datetime(valor, format="%Y%m%d %H%M%S")
-                            fila[titulo] = valor
+                                try:
+                                    valor_convertido = pd.to_datetime(valor, format="%Y%m%d %H%M%S")
+                                except:
+                                    pass
+                            
+                            fila[titulo] = valor_convertido
                     
                     df_fila = pd.DataFrame([fila])
                     df_procesado = pd.concat([df_procesado, df_fila], ignore_index=True)
@@ -116,10 +129,7 @@ def crear_ventana_pestanas():
             global_dataframe = df_procesado
 
             # Mostrar datos procesados en la pestaña 2
-            configurar_tabla(tabla_pestaña2, global_dataframe.head(20))
-
-            # Llamar a actualizar_combobox con el dataframe global
-            window.after(0, lambda: actualizar_combobox(global_dataframe))
+            configurar_tabla(tabla_pestaña2, global_dataframe.head(100))
 
         # Ejecutar procesamiento en hilo separado
         threading.Thread(target=tarea_procesamiento, daemon=True).start()
@@ -131,68 +141,6 @@ def crear_ventana_pestanas():
         command=procesar_datos,
     )
     btn_procesar.pack(pady=10)
-
-    def actualizar_combobox(df):
-        """
-        Actualiza el combobox con las columnas procesadas limpiando nombres.
-        También verifica si el DataFrame tiene columnas válidas.
-        """
-        # Validar las columnas
-        if df is None or df.empty:
-            tk.messagebox.showerror("Error", "El DataFrame está vacío después de procesar los datos.")
-            return
-
-        # Mostrar en consola las columnas disponibles
-        print("Columnas disponibles para el combobox:", df.columns.tolist())
-
-        # Asegurarse de que el combobox existe antes de actualizar
-        if 'combo_columna' in locals() or 'combo_columna' in globals():
-            combo_columna["values"] = df.columns.tolist()
-            
-            # Seleccionar la primera columna como predeterminada, si existe
-            if not df.columns.empty:
-                columna.set(df.columns[0])
-        else:
-            print("Error: combo_columna no está definido")
-
-    # Pestaña 3 - Visualización de datos
-    pestaña3 = ttk.Frame(notebook)
-    notebook.add(pestaña3, text="Visualización de datos")
-    
-    # Variables para selección
-    tipo_grafico = tk.StringVar(value="Bar")
-    columna = tk.StringVar()
-    intervalo = tk.BooleanVar(value=False)
-    color = tk.StringVar(value="#0000FF")
-    cantidad = tk.IntVar(value=10)
-    
-    ttk.Label(pestaña3, text="Seleccione la columna:").pack(anchor="w", padx=10, pady=5)
-    combo_columna = ttk.Combobox(pestaña3, textvariable=columna, state="readonly")
-    combo_columna.pack(fill="x", padx=10)
-
-    # Lógica para generar gráficos
-    def generar_grafico():
-        if global_dataframe is None:
-            tk.messagebox.showwarning("Advertencia", "Primero debe cargar y procesar un archivo.")
-            return
-
-        col = columna.get()
-
-        if col not in global_dataframe.columns:
-            tk.messagebox.showerror("Error", f"La columna '{col}' no existe en los datos.")
-            return
-
-        try:
-            df = global_dataframe[col].dropna().head(cantidad.get())
-            plt.figure(figsize=(10, 6))
-            df.plot(kind="bar", color=color.get())
-            plt.title(f"Gráfico de barras de {col}")
-            plt.tight_layout()
-            plt.show()
-        except Exception as e:
-            tk.messagebox.showerror("Error", f"Error al generar el gráfico: {e}")
-
-    ttk.Button(pestaña3, text="Generar Gráfico", style="Custom.TButton", command=generar_grafico).pack(pady=10, padx=10)
 
     notebook.pack(expand=True, fill="both")
     window.mainloop()
