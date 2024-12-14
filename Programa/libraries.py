@@ -4,6 +4,8 @@ import tkinter as tk
 from tkinter import *
 from tkinter import ttk
 from tkinter import filedialog
+import time
+import os
 
 # Externas
 import pandas as pd

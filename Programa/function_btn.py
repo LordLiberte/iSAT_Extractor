@@ -30,6 +30,26 @@ def cargar_archivo():
     
     return archivo
 
+def guardar_archivo(dataframe):
+    ruta = filedialog.askdirectory(title="Selecciona Carpeta")
+    
+    dia = time.strftime("%d%m%y")
+    hora = time.strftime("%H%M%S")
+    
+    if dataframe is None:
+        print("Primero cargue y procese un archivo")
+    
+    else:
+        dataframe.to_excel(f"{ruta}\Extraido{dia}{hora}.xlsx")
+        try:
+            os.path.isdir(f"{ruta}\Extraido.xlsx")
+        
+        except Exception as e:
+            tk.messagebox.showinfo(message=f"No se ha guardado debido a: {e}", title="Error")
+        
+        else:
+            tk.messagebox.showinfo(message=f"¡Guardado con éxito en: {ruta}\Extraido.xlsx!")
+
 # Función para configurar la tabla
 def configurar_tabla(tabla, dataframe):
     # Limpiar tabla existente
@@ -76,7 +96,7 @@ def configurar_tabla(tabla, dataframe):
         valores = list(fila)
         tabla.insert('', 'end', values=valores)
     
-    print(f"Insertados {len(datos)} registros en la tabla")
+    tk.messagebox.showinfo(message=f"Insertados {len(datos)} registros en la tabla", title="Info")
 
 # Función para ajustar las columnas
 def ajustar_ancho_columnas(tabla, dataframe):

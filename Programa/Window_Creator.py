@@ -45,7 +45,21 @@ def crear_ventana_pestanas():
     pestaña1 = ttk.Frame(notebook)
     notebook.add(pestaña1, text="Carga de Archivos")
     configurar_estilos()
-    tabla_pestaña1 = Treeviews(pestaña1)
+    configurar_estilos_barra()
+
+    # Frame principal de pestaña 1
+    frame_pestaña1 = ttk.Frame(pestaña1)
+    frame_pestaña1.pack(expand=True, fill="both")
+
+    # Frame para los botones (parte superior)
+    frame_botones1 = ttk.Frame(frame_pestaña1)
+    frame_botones1.pack(side="top", fill="x", pady=10)
+
+    # Frame para la tabla (parte inferior)
+    frame_tabla1 = ttk.Frame(frame_pestaña1)
+    frame_tabla1.pack(side="top", expand=True, fill="both")
+
+    tabla_pestaña1 = Treeviews(frame_tabla1)
 
     def cargar_y_mostrar_tabla():
         global global_dataframe
@@ -59,19 +73,33 @@ def crear_ventana_pestanas():
             )
 
     btn_cargar = ttk.Button(
-        pestaña1,
+        frame_botones1,
         text="Cargar Archivo",
         style="Custom.TButton",
         command=cargar_y_mostrar_tabla,
     )
-    btn_cargar.pack(pady=10)
+    btn_cargar.pack(side="left", padx=10)
 
-    # Pestaña 2 - Procesamiento con barra de progreso
+    # Pestaña 2 - Procesamiento de Datos
     pestaña2 = ttk.Frame(notebook)
     notebook.add(pestaña2, text="Procesamiento de Datos")
-    tabla_pestaña2 = Treeviews(pestaña2)
-    progreso = ttk.Progressbar(pestaña2, orient="horizontal", mode="determinate", length=400)
-    progreso.pack(pady=10)
+
+    # Frame principal de pestaña 2
+    frame_pestaña2 = ttk.Frame(pestaña2)
+    frame_pestaña2.pack(expand=True, fill="both")
+
+    # Frame para los botones y barra de progreso (parte superior)
+    frame_botones2 = ttk.Frame(frame_pestaña2)
+    frame_botones2.pack(side="top", fill="x", pady=10)
+
+    # Frame para la tabla (parte inferior)
+    frame_tabla2 = ttk.Frame(frame_pestaña2)
+    frame_tabla2.pack(side="top", expand=True, fill="both")
+
+    tabla_pestaña2 = Treeviews(frame_tabla2)
+    progreso = ttk.Progressbar(frame_botones2, orient="horizontal", mode="determinate", length=400,
+                               style="Green.Horizontal.TProgressbar")
+    progreso.pack(side="left", padx=10)
 
     def procesar_datos():
         global global_dataframe
@@ -102,7 +130,6 @@ def crear_ventana_pestanas():
                             try:
                                 valor_convertido = float(valor.replace(',', '.'))
                             except ValueError:
-                                # Si no se puede convertir a float, mantener como está
                                 valor_convertido = valor
                             
                             # Manejo especial para fechas
@@ -131,17 +158,44 @@ def crear_ventana_pestanas():
             # Mostrar datos procesados en la pestaña 2
             configurar_tabla(tabla_pestaña2, global_dataframe.head(100))
 
-        # Ejecutar procesamiento en hilo separado
         threading.Thread(target=tarea_procesamiento, daemon=True).start()
 
     btn_procesar = ttk.Button(
-        pestaña2,
+        frame_botones2,
         text="Procesar Archivo",
         style="Custom.TButton",
         command=procesar_datos,
     )
-    btn_procesar.pack(pady=10)
+    btn_procesar.pack(side="left", padx=10)
 
+    btn_guardar = ttk.Button(
+        frame_botones2,
+        text="Guardar Archivo .xlsx",
+        style="Custom.TButton",
+        command=lambda: guardar_archivo(global_dataframe)
+    )
+    btn_guardar.pack(side="left", padx=10)
+    
+    
+    # PESTAÑA 3
+    pestaña3 = ttk.Frame(notebook)
+    notebook.add(pestaña3, text="Visualizar Datos")
+    
+    btn_visualizar = ttk.Button(pestaña3, text="Realizar Gráfico", command=graficar,
+                                style="Custom.TButton")
+    btn_visualizar.pack(pady=10, padx=10)
+    
+    
+    
+    # Crear grafico
+    def graficar():
+        global global_dataframe
+        pass
+        
+
+    # Empaquetar el notebook
     notebook.pack(expand=True, fill="both")
     window.mainloop()
+
+
 
