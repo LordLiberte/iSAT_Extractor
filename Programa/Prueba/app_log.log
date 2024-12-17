@@ -1,0 +1,16 @@
+2024-12-14 19:20:32,145 - INFO - Application starting...
+2024-12-14 19:20:32,278 - ERROR - Unexpected error: 'ISATExtractor' object has no attribute 'notebook'
+2024-12-14 19:20:32,280 - ERROR - Traceback (most recent call last):
+  File "c:\Users\ghost\OneDrive\Escritorio\Escritorio\Trabajo\Lear Valls\iSAT_Extractor\Programa\Prueba\main.py", line 23, in run_application
+    window_creator.create_main_window()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\ghost\OneDrive\Escritorio\Escritorio\Trabajo\Lear Valls\iSAT_Extractor\Programa\Prueba\window_creator.py", line 126, in create_main_window
+    app = ISATExtractor(root)
+  File "c:\Users\ghost\OneDrive\Escritorio\Escritorio\Trabajo\Lear Valls\iSAT_Extractor\Programa\Prueba\window_creator.py", line 21, in __init__
+    self._create_file_load_tab()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "c:\Users\ghost\OneDrive\Escritorio\Escritorio\Trabajo\Lear Valls\iSAT_Extractor\Programa\Prueba\window_creator.py", line 42, in _create_file_load_tab
+    pestaña1 = ttk.Frame(self.notebook)
+                         ^^^^^^^^^^^^^
+AttributeError: 'ISATExtractor' object has no attribute 'notebook'
+

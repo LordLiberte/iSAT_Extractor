@@ -123,3 +123,4 @@ def ajustar_ancho_columnas(tabla, dataframe):
         ancho_columna = min(ancho_columna, 300)  # Límite máximo
         
         tabla.column(columna, width=ancho_columna, anchor='center')
+    
