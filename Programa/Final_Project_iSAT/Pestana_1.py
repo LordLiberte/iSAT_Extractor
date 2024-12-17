@@ -1,11 +1,18 @@
-"""Módulo para la creación de la pestaña 1"""
-
+"""Módulo para la configurción y personalización de la pestaña 1"""
+""
 from librerias import *
+import funciones_generales
 
 # Variables globales
 
 dataframe_global = pd.DataFrame()
 ruta_archivo_global = ""
+
+def obtener_dataframe():
+    return dataframe_global
+
+def obtener_ruta_archivo():
+    return ruta_archivo_global
 
 # Entorno global pestaña =================================================================
 def pestana1(notebook):
@@ -32,14 +39,14 @@ def pestana1(notebook):
         else:
             print("Archivo no soportado")
         
+        
         # Asignar a la variable global sólo si se cargó correctamente
         if not dataframe.empty:
             dataframe_global = dataframe
+            mostrar_datos()
             messagebox.showinfo("Info", "Archivo cargado y procesado correctamente")
         else:
             messagebox.showerror("Error", "El archivo está vacío o no se pudo procesar")
-        
-        mostrar_datos()
     
     # Crear tabla y mostrar información --------------------------------------------------
     def mostrar_datos():
@@ -66,13 +73,6 @@ def pestana1(notebook):
         etiqueta.place(x=20, y=650, width=1240, height=30)
         nombre_archivo_cargado = ruta_archivo_global.split("/")[-1]  # Extraer el nombre
         etiqueta.config(text=f"Archivo cargado: {nombre_archivo_cargado}")
-        
-    # Actualizar fecha -------------------------------------------------------------------
-    def actualizar_fecha():
-        fecha = datetime.datetime.today()
-        fecha_label = ttk.Label(pestana1, text=f"{fecha}")
-        fecha_label.place(x=0, y=0, width=108, height=20)
-        pestana1.after(1000, actualizar_fecha)
             
      
     # Creación de pestaña y botones ======================================================
@@ -80,8 +80,8 @@ def pestana1(notebook):
     pestana1 = ttk.Frame(notebook, width=1280, height=720)
     pestana1.pack_propagate(False) # Evita que la pestaña cambie de tamaño
     
-    # Actualizar fecha -------------------------------------------------------------------
-    actualizar_fecha()
+    # Actualizar fecha --------------------------------------------------------------------
+    funciones_generales.actualizar_fecha(pestana1)
     
     # Botones ----------------------------------------------------------------------------
     # Boton cargar archivo @@@@@@@@
@@ -94,4 +94,4 @@ def pestana1(notebook):
     tree.place(x=20, y=100, width=1240, height=540)
     
     # FIN --------------------------------------------------------------------------------  
-    return pestana1 # Devolver la pestaña configurada
+    return pestana1 # Devolver la pestaña configurada""
