@@ -1,7 +1,7 @@
 """Módulo para la configuración y diseño de la pestaña 3"""
 
 from librerias import *
-import Pestana_2
+import Programa.Final_Project_iSAT.transform_page as transform_page
 import funciones_generales
 
 # Variables globales
@@ -14,7 +14,7 @@ def pestana3(notebook):
     # Funciones de la pestaña =============================================================
     # Función para actualizar dinámicamente el Combobox
     def actualizar_combobox():
-        dataframe_global = Pestana_2.obtener_dataframe()
+        dataframe_global = transform_page.obtener_dataframe()
         
         global últimas_columnas
         # Verificar si las columnas han cambiado
@@ -83,7 +83,7 @@ def pestana3(notebook):
         
         global dataframe_global
         if dataframe_global.empty:
-            dataframe_global = Pestana_2.obtener_dataframe()  # Obtenemos Dataframe de Pestaña 2
+            dataframe_global = transform_page.obtener_dataframe()  # Obtenemos Dataframe de Pestaña 2
         
         # Histograma @@@@
         if histograma_value.get():

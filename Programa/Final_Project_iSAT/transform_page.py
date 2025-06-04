@@ -1,6 +1,6 @@
 """Módulo para la configuración y personalización de la Pestaña 2"""
 from librerias import *
-import Pestana_1
+import Programa.Final_Project_iSAT.load_page as load_page
 import funciones_generales
 
 # Variables globales
@@ -43,7 +43,7 @@ def pestana2(notebook):
         
         # Obtener dataframe de la pestaña 1
         try:
-            dataframe = Pestana_1.obtener_dataframe()
+            dataframe = load_page.obtener_dataframe()
         except Exception as e:
             tk.messagebox.showerror("Error", f"No se pudo cargar el dataframe: {e}")
             return
@@ -115,7 +115,7 @@ def pestana2(notebook):
 
         etiqueta = ttk.Label(pestana2, text="", anchor="w")
         etiqueta.place(x=20, y=650, width=1240, height=30)
-        ruta_archivo_global = Pestana_1.obtener_ruta_archivo()
+        ruta_archivo_global = load_page.obtener_ruta_archivo()
         nombre_archivo_cargado = ruta_archivo_global.split("/")[-1]  # Extraer el nombre
         etiqueta.config(text=f"Archivo procesado: {nombre_archivo_cargado}")
 
