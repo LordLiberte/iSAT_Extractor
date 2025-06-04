@@ -1,6 +1,7 @@
 """
 Módulo para el arranque de la aplicación
 """
+
 import Create_Window
 
 # Llamada a arrancar aplicación
