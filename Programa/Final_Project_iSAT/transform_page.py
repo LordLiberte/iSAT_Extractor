@@ -1,6 +1,6 @@
 """Módulo para la configuración y personalización de la Pestaña 2"""
 from librerias import *
-import Programa.Final_Project_iSAT.load_page as load_page
+import load_page as load_page
 import funciones_generales
 
 # Variables globales

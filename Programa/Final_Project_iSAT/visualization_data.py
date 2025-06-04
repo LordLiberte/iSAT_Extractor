@@ -1,7 +1,7 @@
 """Módulo para la configuración y diseño de la pestaña 3"""
 
 from librerias import *
-import Programa.Final_Project_iSAT.transform_page as transform_page
+import transform_page as transform_page
 import funciones_generales
 
 # Variables globales

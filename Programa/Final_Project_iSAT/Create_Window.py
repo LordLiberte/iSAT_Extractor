@@ -1,8 +1,8 @@
 """Módulo para la creación de la ventana principal"""
 from librerias import *
-import Programa.Final_Project_iSAT.load_page as load_page
-import Programa.Final_Project_iSAT.transform_page as transform_page
-import Pestana_3
+import load_page 
+import transform_page 
+import Programa.Final_Project_iSAT.visualization_data as visualization_data
 
 def iniciar_ventana():
     
@@ -32,7 +32,7 @@ def iniciar_ventana():
     notebook.add(pestana2, text="Procesar Datos") # Integro la pestaña al notebook
     
     # Pestaña 3
-    pestana3 = Pestana_3.pestana3(notebook) # Traigo pestaña al módulo
+    pestana3 = visualization_data.pestana3(notebook) # Traigo pestaña al módulo
     pestana3.pack(fill="both", expand=True) 
     notebook.add(pestana3, text="Visualizar Datos")  # Integro pestaña al notebook
     
