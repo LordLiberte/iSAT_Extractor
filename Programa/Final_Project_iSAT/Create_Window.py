@@ -2,7 +2,8 @@
 from librerias import *
 import load_page 
 import transform_page 
-import Programa.Final_Project_iSAT.visualization_data as visualization_data
+import visualization_data
+import preprocessing_system
 
 def iniciar_ventana():
     
@@ -32,9 +33,14 @@ def iniciar_ventana():
     notebook.add(pestana2, text="Procesar Datos") # Integro la pestaña al notebook
     
     # Pestaña 3
-    pestana3 = visualization_data.pestana3(notebook) # Traigo pestaña al módulo
-    pestana3.pack(fill="both", expand=True) 
-    notebook.add(pestana3, text="Visualizar Datos")  # Integro pestaña al notebook
+    pestana3 = preprocessing_system.pestana3(notebook) # Traigo pestaña al módulo
+    pestana3.pack(fill="both", expand=True)
+    notebook.add(pestana3, text="Preprocesar Datos")  # Integro pestaña al notebook
+    
+    # Pestaña 4
+    pestana4 = visualization_data.pestana4(notebook) # Traigo pestaña al módulo
+    pestana4.pack(fill="both", expand=True) 
+    notebook.add(pestana4, text="Visualizar Datos")  # Integro pestaña al notebook
     
     
     window.mainloop()  # Bucle principal

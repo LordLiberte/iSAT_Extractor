@@ -9,7 +9,7 @@ dataframe_global = pd.DataFrame()
 últimas_columnas = []
 
 # Entorno global pestaña 3 ================================================================
-def pestana3(notebook):
+def pestana4(notebook):
     
     # Funciones de la pestaña =============================================================
     # Función para actualizar dinámicamente el Combobox
@@ -30,7 +30,7 @@ def pestana3(notebook):
             últimas_columnas = nuevas_columnas
         
         # Ejecutar nuevamente después de 1 segundo
-        pestana3.after(1000, actualizar_combobox)
+        pestana4.after(1000, actualizar_combobox)
         
         # Función para mostrar el estado de los Checkbuttons @@@
     def mostrar_estado():
@@ -113,22 +113,22 @@ def pestana3(notebook):
 
     # Creación de pestaña y botones =======================================================
     # Pestaña -----------------------------------------------------------------------------
-    pestana3 = ttk.Frame(notebook, width=1280, height=720)
-    pestana3.pack_propagate(False)  # Evita que la pestaña cambie de tamaño
+    pestana4 = ttk.Frame(notebook, width=1280, height=720)
+    pestana4.pack_propagate(False)  # Evita que la pestaña cambie de tamaño
 
     # Actualizar fecha --------------------------------------------------------------------
-    funciones_generales.actualizar_fecha(pestana3)
+    funciones_generales.actualizar_fecha(pestana4)
 
     # Desplegable con opciones 1 -----------------------------------------------------------
-    combo_opciones = ttk.Combobox(pestana3, values=list(dataframe_global.columns), width=50)
+    combo_opciones = ttk.Combobox(pestana4, values=list(dataframe_global.columns), width=50)
     combo_opciones.place(x=50, y=50)
-    eje_x_label = ttk.Label(pestana3, text="Eje X")
+    eje_x_label = ttk.Label(pestana4, text="Eje X")
     eje_x_label.place(x=50, y=20, width=40, height=30)
     
     # Desplegable con opciones 1 -----------------------------------------------------------
-    combo_opciones2 = ttk.Combobox(pestana3, values=list(dataframe_global.columns), width=50)
+    combo_opciones2 = ttk.Combobox(pestana4, values=list(dataframe_global.columns), width=50)
     combo_opciones2.place(x=50, y=110)
-    eje_y_label = ttk.Label(pestana3, text="Eje Y")
+    eje_y_label = ttk.Label(pestana4, text="Eje Y")
     eje_y_label.place(x=50, y=80, width=40, height=30)
     
     # Iniciar la actualización dinámica del Combobox -------------------------------------
@@ -137,34 +137,34 @@ def pestana3(notebook):
     # Checkbuttons -----------------------------------------------------------------------
     # Checkbutton Histograma  @@@@
     histograma_value = tk.BooleanVar()  # Valor que tomará TRUE o FALSE
-    histograma_check = tk.Checkbutton(pestana3, text="Histograma", variable=histograma_value)  # Checkbutton que modofica el valor 
+    histograma_check = tk.Checkbutton(pestana4, text="Histograma", variable=histograma_value)  # Checkbutton que modofica el valor 
     histograma_check.place(x=100, y=140, width=80, height=30) # Posición del checkbutton
     
     # Checkbutton Dispersión  @@@@
     dispersion_value = tk.BooleanVar() # Valor que tomará TRUE o FALSE
-    dispersion_check = tk.Checkbutton(pestana3, text="Dispersión", variable=dispersion_value) # Checkbutton que modofica el valor
+    dispersion_check = tk.Checkbutton(pestana4, text="Dispersión", variable=dispersion_value) # Checkbutton que modofica el valor
     dispersion_check.place(x=96, y=180, width=80, height=30) # Posición del checkbutton
     
     # Checkbutton Barras  @@@@
     barras_value = tk.BooleanVar() # Valor que tomará TRUE o FALSE
-    barras_check = tk.Checkbutton(pestana3, text="Barras", variable=barras_value) # Checkbutton que modofica el valor
+    barras_check = tk.Checkbutton(pestana4, text="Barras", variable=barras_value) # Checkbutton que modofica el valor
     barras_check.place(x=85, y=220, width=80, height=30) # Posición del checkbutton
     
     # Botón para ejecutar la función mostrar_estado --------------------------------------
-    boton_seleccion = tk.Button(pestana3, text="Mostrar Estado", command=mostrar_estado)
+    boton_seleccion = tk.Button(pestana4, text="Mostrar Estado", command=mostrar_estado)
     boton_seleccion.place(x=200, y=180)
     
     # Botón para realizar gráfico en función de lo seleccionado ---------------------------
-    boton_graficar = tk.Button(pestana3, text="Realizar Gráfico", command=realizar_grafico)
+    boton_graficar = tk.Button(pestana4, text="Realizar Gráfico", command=realizar_grafico)
     boton_graficar.place(x=400, y=78)
     
     # PENDIENTE DE REVISAR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     # Introducir diferenciación -----------------------------------------------------------
-    diferenciar = ttk.Combobox(pestana3, values=list(dataframe_global.columns), width=50)
+    diferenciar = ttk.Combobox(pestana4, values=list(dataframe_global.columns), width=50)
     diferenciar.place(x=700, y=600)
-    hue_label = tk.Label(pestana3, text="Diferenciación")
+    hue_label = tk.Label(pestana4, text="Diferenciación")
     hue_label.place(x=600, y=500)
     
     
     # FIN -------------------------------------------------------------------------------------------
-    return pestana3
+    return pestana4
