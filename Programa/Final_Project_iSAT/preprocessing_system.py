@@ -2,6 +2,7 @@ from librerias import *
 import load_page as load_page
 import funciones_generales
 import transform_page as transform_page
+from sklearn.preprocessing import MinMaxScaler
 
 def pestana3(notebook):
     ## Creación de la pestaña ===================================================
